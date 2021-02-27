@@ -49,7 +49,7 @@ class Users {
                 duration,
                 description
             }
-            return objectForSending
+            return excersice
         }
     }
 
