@@ -1,29 +1,18 @@
-const autoBind = require('auto-bind')
-
-class DateWorker {
-    constructor() {
-        autoBind(this);
-    }
-
-    isValidDate(date) {
-        const dateReg = /^\d{4}(-)\d{2}\1\d{2}$/
-        const dataObject = new Date(date)
-        return dateReg.test(date) && (dataObject != 'Invalid Date')
-    }
-
-    formatDate(date) {
-        date = this.isValidDate(date)
-            ? new Date(date).toDateString().slice(0, 15)
-            : new Date().toDateString().slice(0, 15)
-        return date
-    }
-
-    sortByDate({ date: firstDate }, { date: secondDate }) {
-        return new Date(firstDate) - new Date(secondDate)
-    }
-
+const isValidDate = (date) => {
+    const dateReg = /^\d{4}(-)\d{2}\1\d{2}$/
+    const dataObject = new Date(date)
+    return dateReg.test(date) && (dataObject != 'Invalid Date')
 }
 
-const dateFormater = new DateWorker();
+const formatDate = (date) => {
+    date = isValidDate(date)
+        ? new Date(date).toDateString().slice(0, 15)
+        : new Date().toDateString().slice(0, 15)
+    return date
+}
 
-module.exports = dateFormater
+const sortByDate = (arr) => {
+    arr.sort(({ date: firstDate }, { date: secondDate }) => new Date(firstDate) - new Date(secondDate))
+}
+
+module.exports = { isValidDate, formatDate, sortByDate }

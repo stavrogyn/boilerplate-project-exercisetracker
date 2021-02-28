@@ -1,6 +1,6 @@
 const autoBind = require('auto-bind')
 const User = require('./user')
-const dateFormater = require('./date')
+const { formatDate, sortByDate } = require('./date')
 const { nanoid } = require('nanoid')
 
 
@@ -37,11 +37,11 @@ class Users {
 
     addExercise({ userId, description, duration, date }) {
         duration = parseInt(duration)
-        date = dateFormater.formatDate(date)
+        date = formatDate(date)
         const user = this.getUserById(userId)
         if (user != undefined) {
             user.log.push({ description, duration, date })
-            user.log.sort(dateFormater.sortByDate)
+            sortByDate(user.log)
             const excersice = {
                 _id: user._id,
                 username: user.username,

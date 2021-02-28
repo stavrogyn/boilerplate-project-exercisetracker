@@ -1,4 +1,4 @@
-const dateFormater = require('./date')
+const { isValidDate } = require('./date')
 
 module.exports = class User {
     constructor(id, username) {
@@ -13,7 +13,7 @@ module.exports = class User {
     }
 
     filterLogByFrom(filteredLog, from) {
-        if (dateFormater.isValidDate(from)) {
+        if (isValidDate(from)) {
             return filteredLog.filter(({ date }) => {
                 const fromDate = new Date(from)
                 const logDate = new Date(date)
@@ -25,7 +25,7 @@ module.exports = class User {
     }
 
     filterLogByTo(filteredLog, to) {
-        if (dateFormater.isValidDate(to)) {
+        if (isValidDate(to)) {
             return filteredLog.filter(({ date }) => {
                 const toDate = new Date(to)
                 const logDate = new Date(date)
